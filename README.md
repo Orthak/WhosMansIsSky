@@ -3,6 +3,6 @@ A Haskell learning project. Set standards for naming new discoveries in No Man's
 
 # Future Plans (No order)
     1. Set keyword mapping through config file.
-    2. Add support for Platns, Planets, Systems, and Stations.
+    2. Add support for Plants, Planets, Systems, and Stations.
     3. Automatically restart the console when a name is generated.
     4. Improve the code for optimization.
