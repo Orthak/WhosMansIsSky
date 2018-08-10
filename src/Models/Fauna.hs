@@ -70,7 +70,7 @@ module Models.Fauna where
         | Caves
         deriving (Eq, Enum, Show, Read, Bounded)
 
-    data temperament =
+    data Temperament =
         Generic
         | Passive
         | Prey
