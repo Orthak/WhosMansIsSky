@@ -40,16 +40,16 @@ module Main where
     putStrLn "EcoSystem: "
     putStrLn $ show [(minBound :: EcoSystem) ..]
     theEcoSystem <- getLine
-    putStrLn "Temperment: "
-    putStrLn $ show [(minBound :: Temperment) ..]
-    theTemperment <- getLine
+    putStrLn "Temperament: "
+    putStrLn $ show [(minBound :: Temperament) ..]
+    theTemperament <- getLine
     let creature = Creature { 
       biome = read theBiome
       , gender = read theGender
       , faunaAge = read theAge
       , diet = read theDiet
       , ecoSystem = read theEcoSystem
-      , temperment = read theTemperment
+      , temperament = read theTemperament
       }
     putStrLn $ finalCreature creature
 

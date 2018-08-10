@@ -12,7 +12,7 @@ module Translation.FaunaTranslate where
       ++ " "
       ++ dietTranslate creature
       ++ ecoSystemTranslate creature
-      ++ tempermentTranslate creature
+      ++ temperamentTranslate creature
   
     biomeTranslate :: Creature -> String
     biomeTranslate creature = biomeMap $ biome creature
@@ -29,6 +29,6 @@ module Translation.FaunaTranslate where
     ecoSystemTranslate :: Creature -> String
     ecoSystemTranslate creature = ecoSystemMap $ ecoSystem creature
   
-    tempermentTranslate :: Creature -> String
-    tempermentTranslate creature = tempermentMap $ temperment creature
+    temperamentTranslate :: Creature -> String
+    temperamentTranslate creature = temperamentMap $ temperament creature
   

@@ -15,7 +15,7 @@ module Models.Fauna where
         , faunaAge :: FaunaAge
         , diet :: Diet
         , ecoSystem :: EcoSystem
-        , temperment :: Temperment
+        , temperament :: Temperament
         } deriving (Show, Read)
 
     data Biome = 
@@ -70,7 +70,7 @@ module Models.Fauna where
         | Caves
         deriving (Eq, Enum, Show, Read, Bounded)
 
-    data Temperment =
+    data temperament =
         Generic
         | Passive
         | Prey
