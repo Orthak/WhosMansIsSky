@@ -1,0 +1,6 @@
+# Folders
+.stack-work/
+
+# Files
+.gitignore
+Dockerfile
