@@ -3,19 +3,22 @@ module Main where
   import System.IO
   import Models.Fauna
   import Models.Flora
+  import Models.Entities
   import Translation.FaunaTranslate
   import Translation.FloraTranslate
 
   main :: IO ()
   main = do
     putStrLn "What are we looking at? ('q' to exit)"
+    putStrLn $ show [(minBound :: Entities) ..]
     lookingAt <- getLine
     -- Separated out the processing of each entity to it's 
     -- own function. This is to reduce the complexity of this
     -- function, and easier to reason about what's actually 
     -- trying to be accomplished.
     if (lookingAt == "Animal") 
-      then processAnimal
+      --then processAnimal
+      then processUnknown
     else if (lookingAt == "Plant")
       then processPlant
     else if (lookingAt == "q")
@@ -27,82 +30,61 @@ module Main where
   -- the typeclass of Read and Show. This is so we can 
   -- read the input as the type we want, as well as show
   -- the list of optons that we're passed.
-  inputOf :: (Read a, Show a) => String -> [a] -> IO a
-  inputOf name options = do
+  inputOf :: (String, String) -> IO String
+  inputOf (name, options) = do
     putStrLn name
-    putStrLn $ show options
+    putStrLn options
     hFlush stdout
-    selected <- readLn
+    selected <- getLine
     return selected
 
+  animalOptions :: [(String, String)]
+  animalOptions = 
+    [ ("Biome", show [(minBound :: Biome) ..])
+    , ("Gender", show [(minBound :: Gender) ..])
+    , ("Age", show [(minBound :: FaunaAge) ..])
+    , ("Diet", show [(minBound :: Diet) ..])
+    , ("EcoSystem", show [(minBound :: EcoSystem) ..])
+    , ("Temperament", show [(minBound :: Temperament) ..])
+    ]
   processAnimal :: IO ()
   processAnimal = do
-<<<<<<< HEAD
-    theBiome <- inputOf "Biome" [(minBound :: Biome) ..]
-    theGender <- inputOf "Gender" [(minBound :: Gender) ..]
-    theAge <- inputOf "Age" [(minBound :: FaunaAge) ..]
-    theDiet <- inputOf "Diet" [(minBound :: Diet) ..]
-    theEcoSystem <- inputOf "EcoSystem" [(minBound :: EcoSystem) ..]
-    theTemperment <- inputOf "Temperment" [(minBound :: Temperment) ..]
+    options <- sequence $ map inputOf animalOptions
+    putStrLn $ show options
     let creature = Creature { 
-      biome = theBiome
-      , gender = theGender
-      , faunaAge = theAge
-      , diet = theDiet
-      , ecoSystem = theEcoSystem
-      , temperment =  theTemperment
-=======
-    -- I don't really like this. I know there must be a better
-    -- way to achieve this without explitcitly defining each and
-    -- every property cose.
-    putStrLn "Biome: "
-    putStrLn $ show [(minBound :: Biome) ..]
-    theBiome <- getLine
-    putStrLn "Gender: "
-    putStrLn $ show [(minBound :: Gender) ..]
-    theGender <- getLine
-    putStrLn "Age: "
-    putStrLn $ show [(minBound :: FaunaAge) ..]
-    theAge <- getLine
-    putStrLn "Diet: "
-    putStrLn $ show [(minBound :: Diet) ..]
-    theDiet <- getLine
-    putStrLn "EcoSystem: "
-    putStrLn $ show [(minBound :: EcoSystem) ..]
-    theEcoSystem <- getLine
-    putStrLn "Temperament: "
-    putStrLn $ show [(minBound :: Temperament) ..]
-    theTemperament <- getLine
-    let creature = Creature { 
-      biome = read theBiome
-      , gender = read theGender
-      , faunaAge = read theAge
-      , diet = read theDiet
-      , ecoSystem = read theEcoSystem
-      , temperament = read theTemperament
->>>>>>> 43ccd14d3fe01facdd7cc8e422c5e39c1ad56983
+        biome = read $ options !! 0
+      , gender = read $ options !! 1
+      , faunaAge = read $ options !! 2
+      , diet = read $ options !! 3
+      , ecoSystem = read $ options !! 4
+      , temperament = read $ options !! 5
       }
     putStrLn $ (++) (finalCreature creature) "\n"
-    main
+    main -- Send execution back to the start. This is so we don't have to constantly restart the console.
 
+  plantOptions :: [(String, String)]
+  plantOptions = 
+    [ ("Age", show [(minBound :: FloraAge) ..])
+    , ("Roots", show [(minBound :: RootStructure) ..])
+    , ("Nutrients", show [(minBound :: NutrientSource) ..])
+    , ("Notes", show [(minBound :: Notes) ..])
+    ]
   processPlant :: IO ()
   processPlant = do
-    theAge <- inputOf "Age" [(minBound :: FloraAge) ..]
-    theRoots <- inputOf "Roots" [(minBound :: RootStructure) ..]
-    theNutrients <- inputOf "Nutrients" [(minBound :: NutrientSource) ..]
-    theNotes <- inputOf "Notes" [(minBound :: Notes) ..]
+    options <- sequence $ map inputOf plantOptions
+    putStrLn $ show options
     let plant = Plant {
-      floraAge = theAge
-      , rootStructure = theRoots
-      , nutrientSource = theNutrients
-      , notes = theNotes
-    }
+        floraAge = read $ options !! 0
+      , rootStructure = read $ options !! 1
+      , nutrientSource = read $ options !! 2
+      , notes = read $ options !! 3
+      }
     putStrLn $ (++) (finalPlant plant) "\n"
     main
 
   processUnknown :: IO ()
   processUnknown = do
-    putStrLn "Unknown entity name."
+    putStrLn "Not yet implemented, or unknown entity."
     main
 
   end :: IO ()

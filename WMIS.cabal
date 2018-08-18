@@ -16,7 +16,8 @@ extra-source-files:  README.md
 executable WMIS
   hs-source-dirs:      src
   main-is:             Main.hs
-  other-modules:       Models.Fauna
+  other-modules:       Models.Entities
+                       , Models.Fauna
                        , BioMap.FaunaMap
                        , Translation.FaunaTranslate
                        , Models.Flora

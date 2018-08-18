@@ -1,8 +1,8 @@
 module Models.Entities where
 
     data Entities = 
-        Fauna
-        | Flora
+        Animals
+        | Plants
         | Planets
         | Stations
         | Systems

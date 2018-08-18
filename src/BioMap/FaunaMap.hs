@@ -54,7 +54,7 @@ module BioMap.FaunaMap where
         | e == Water    = "Waer"
         | e == Caves    = "Caes"
 
-    temperamentMap :: temperament -> String
+    temperamentMap :: Temperament -> String
     temperamentMap t
         | t == Generic          = "Genic"
         | t == Passive          = "Pave"
