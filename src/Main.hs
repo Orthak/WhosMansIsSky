@@ -37,6 +37,7 @@ module Main where
 
   processAnimal :: IO ()
   processAnimal = do
+<<<<<<< HEAD
     theBiome <- inputOf "Biome" [(minBound :: Biome) ..]
     theGender <- inputOf "Gender" [(minBound :: Gender) ..]
     theAge <- inputOf "Age" [(minBound :: FaunaAge) ..]
@@ -50,6 +51,36 @@ module Main where
       , diet = theDiet
       , ecoSystem = theEcoSystem
       , temperment =  theTemperment
+=======
+    -- I don't really like this. I know there must be a better
+    -- way to achieve this without explitcitly defining each and
+    -- every property cose.
+    putStrLn "Biome: "
+    putStrLn $ show [(minBound :: Biome) ..]
+    theBiome <- getLine
+    putStrLn "Gender: "
+    putStrLn $ show [(minBound :: Gender) ..]
+    theGender <- getLine
+    putStrLn "Age: "
+    putStrLn $ show [(minBound :: FaunaAge) ..]
+    theAge <- getLine
+    putStrLn "Diet: "
+    putStrLn $ show [(minBound :: Diet) ..]
+    theDiet <- getLine
+    putStrLn "EcoSystem: "
+    putStrLn $ show [(minBound :: EcoSystem) ..]
+    theEcoSystem <- getLine
+    putStrLn "Temperament: "
+    putStrLn $ show [(minBound :: Temperament) ..]
+    theTemperament <- getLine
+    let creature = Creature { 
+      biome = read theBiome
+      , gender = read theGender
+      , faunaAge = read theAge
+      , diet = read theDiet
+      , ecoSystem = read theEcoSystem
+      , temperament = read theTemperament
+>>>>>>> 43ccd14d3fe01facdd7cc8e422c5e39c1ad56983
       }
     putStrLn $ (++) (finalCreature creature) "\n"
     main
